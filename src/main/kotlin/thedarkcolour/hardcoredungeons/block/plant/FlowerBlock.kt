@@ -11,11 +11,9 @@ open class FlowerBlock(properties: PlantProperties) : FlowerBlock(properties.eff
     private val strict = properties.strict
     private val blocks = properties.blocks
 
-    override fun isValidGround(state: BlockState, worldIn: IBlockReader, pos: BlockPos): Boolean {
-        return if (strict) {
-            state.block.matchesAny(blocks)
-        } else {
-            super.isValidGround(state, worldIn, pos) && state.block.matchesAny(blocks)
-        }
+    override fun isValidGround(state: BlockState, worldIn: IBlockReader, pos: BlockPos) = if (strict) {
+        state.block.matchesAny(blocks)
+    } else {
+        super.isValidGround(state, worldIn, pos) && state.block.matchesAny(blocks)
     }
 }

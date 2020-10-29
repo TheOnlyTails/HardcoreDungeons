@@ -27,7 +27,11 @@ class SphereCheekyRender(manager: EntityRendererManager) : EntityRenderer<Cheeky
             stack.push()
             stack.scale(subScale, subScale, subScale)
 
-            aaaaaaaaaaa.render(buffer, RenderType.getEntityTranslucent(getEntityTexture(cheeky)), stack, 0x00f000f0, 0x7fffffff)
+            aaaaaaaaaaa.render(buffer,
+                RenderType.getEntityTranslucent(getEntityTexture(cheeky)),
+                stack,
+                0x00f000f0,
+                0x7fffffff)
 
             stack.pop()
         }
@@ -37,9 +41,8 @@ class SphereCheekyRender(manager: EntityRendererManager) : EntityRenderer<Cheeky
         super.render(cheeky, entityYaw, partialTicks, stack, buffer, light)
     }
 
-    override fun getEntityTexture(entity: CheekyEntity): ResourceLocation {
-        return ResourceLocation("minecraft:textures/block/water_still.png")
-    }
+    override fun getEntityTexture(entity: CheekyEntity) =
+        ResourceLocation("minecraft:textures/block/water_still.png")
 
     companion object {
         val aaaaaaaaaaa = ModelHandle.of("hardcoredungeons:models/entity/sphere.obj")

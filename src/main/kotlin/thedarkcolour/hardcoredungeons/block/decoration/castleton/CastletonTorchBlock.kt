@@ -1,9 +1,6 @@
 package thedarkcolour.hardcoredungeons.block.decoration.castleton
 
-import net.minecraft.block.Block
-import net.minecraft.block.BlockState
-import net.minecraft.block.TorchBlock
-import net.minecraft.block.WallTorchBlock
+import net.minecraft.block.*
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.BlockItemUseContext
 import net.minecraft.item.ItemStack
@@ -17,7 +14,7 @@ import net.minecraft.world.World
 import thedarkcolour.hardcoredungeons.block.properties.HProperties
 import thedarkcolour.hardcoredungeons.registry.HItems
 import thedarkcolour.hardcoredungeons.registry.HParticles
-import java.util.*
+import java.util.Random
 
 class CastletonTorchBlock(properties: HProperties) : TorchBlock(properties.build(), HParticles.CASTLETON_TORCH_FLAME) {
     init {
@@ -28,9 +25,8 @@ class CastletonTorchBlock(properties: HProperties) : TorchBlock(properties.build
         builder.add(LIT)
     }
 
-    override fun getStateForPlacement(context: BlockItemUseContext): BlockState {
-        return defaultState.with(LIT, context.item.item == HItems.CASTLETON_TORCH)
-    }
+    override fun getStateForPlacement(context: BlockItemUseContext): BlockState =
+        defaultState.with(LIT, context.item.item == HItems.CASTLETON_TORCH)
 
     override fun animateTick(state: BlockState, worldIn: World, pos: BlockPos, rand: Random?) {
         if (state[LIT]) {
@@ -42,24 +38,20 @@ class CastletonTorchBlock(properties: HProperties) : TorchBlock(properties.build
         }
     }
 
-    override fun getLightValue(state: BlockState, world: IBlockReader?, pos: BlockPos?): Int {
-        return if (state[LIT]) super.getLightValue(state, world, pos) else 0
-    }
+    override fun getLightValue(state: BlockState, world: IBlockReader?, pos: BlockPos?) =
+        if (state[LIT]) super.getLightValue(state, world, pos) else 0
 
     override fun getPickBlock(
-        state: BlockState, result: RayTraceResult?, world: IBlockReader?, pos: BlockPos?, player: PlayerEntity?
-    ): ItemStack {
-        return if (state[LIT]) ItemStack(HItems.CASTLETON_TORCH) else ItemStack(HItems.BURNT_CASTLETON_TORCH)
-    }
+        state: BlockState, result: RayTraceResult?, world: IBlockReader?, pos: BlockPos?, player: PlayerEntity?,
+    ) = if (state[LIT]) ItemStack(HItems.CASTLETON_TORCH) else ItemStack(HItems.BURNT_CASTLETON_TORCH)
 
     class Wall(properties: HProperties) : WallTorchBlock(properties.build(), HParticles.CASTLETON_TORCH_FLAME) {
         init {
             defaultState = defaultState.with(LIT, true)
         }
 
-        override fun getStateForPlacement(context: BlockItemUseContext): BlockState? {
-            return super.getStateForPlacement(context)?.with(LIT, context.item.item == HItems.CASTLETON_TORCH)
-        }
+        override fun getStateForPlacement(context: BlockItemUseContext) =
+            super.getStateForPlacement(context)?.with(LIT, context.item.item == HItems.CASTLETON_TORCH)
 
         override fun fillStateContainer(builder: StateContainer.Builder<Block, BlockState>) {
             builder.add(HORIZONTAL_FACING, LIT)
@@ -76,15 +68,12 @@ class CastletonTorchBlock(properties: HProperties) : TorchBlock(properties.build
             }
         }
 
-        override fun getLightValue(state: BlockState, world: IBlockReader?, pos: BlockPos?): Int {
-            return if (state[LIT]) super.getLightValue(state, world, pos) else 0
-        }
+        override fun getLightValue(state: BlockState, world: IBlockReader?, pos: BlockPos?) =
+            if (state[LIT]) super.getLightValue(state, world, pos) else 0
 
         override fun getPickBlock(
-            state: BlockState, result: RayTraceResult?, world: IBlockReader?, pos: BlockPos?, player: PlayerEntity?
-        ): ItemStack {
-            return if (state[LIT]) ItemStack(HItems.CASTLETON_TORCH) else ItemStack(HItems.BURNT_CASTLETON_TORCH)
-        }
+            state: BlockState, result: RayTraceResult?, world: IBlockReader?, pos: BlockPos?, player: PlayerEntity?,
+        ) = if (state[LIT]) ItemStack(HItems.CASTLETON_TORCH) else ItemStack(HItems.BURNT_CASTLETON_TORCH)
     }
 
     companion object {

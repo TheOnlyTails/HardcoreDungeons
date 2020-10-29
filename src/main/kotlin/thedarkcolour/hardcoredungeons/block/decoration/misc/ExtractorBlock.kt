@@ -2,7 +2,6 @@ package thedarkcolour.hardcoredungeons.block.decoration.misc
 
 import net.minecraft.block.BlockState
 import net.minecraft.entity.player.PlayerEntity
-import net.minecraft.tileentity.TileEntity
 import net.minecraft.util.ActionResultType
 import net.minecraft.util.Hand
 import net.minecraft.util.math.BlockPos
@@ -19,13 +18,9 @@ import thedarkcolour.hardcoredungeons.tileentity.ExtractorTileEntity
  * @author TheDarkColour
  */
 class ExtractorBlock(properties: HProperties) : HorizontalBlock(properties) {
-    override fun hasTileEntity(state: BlockState?): Boolean {
-        return true
-    }
+    override fun hasTileEntity(state: BlockState?) = true
 
-    override fun createTileEntity(state: BlockState?, world: IBlockReader?): TileEntity? {
-        return ExtractorTileEntity()
-    }
+    override fun createTileEntity(state: BlockState?, world: IBlockReader?) = ExtractorTileEntity()
 
     override fun onBlockActivated(
         state: BlockState, worldIn: World, pos: BlockPos, playerIn: PlayerEntity,

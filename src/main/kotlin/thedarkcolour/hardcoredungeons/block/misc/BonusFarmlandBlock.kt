@@ -16,17 +16,14 @@ import net.minecraft.util.Direction
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.shapes.ISelectionContext
 import net.minecraft.util.math.shapes.VoxelShape
-import net.minecraft.world.IBlockReader
-import net.minecraft.world.IWorld
-import net.minecraft.world.IWorldReader
-import net.minecraft.world.World
+import net.minecraft.world.*
 import net.minecraft.world.server.ServerWorld
 import net.minecraftforge.common.*
 import net.minecraftforge.event.world.BlockEvent
 import net.minecraftforge.eventbus.api.Event
 import thedarkcolour.hardcoredungeons.block.HBlock
 import thedarkcolour.hardcoredungeons.block.properties.HProperties
-import java.util.*
+import java.util.Random
 import java.util.function.Supplier
 
 /**
@@ -103,9 +100,7 @@ class BonusFarmlandBlock(
         builder.add(MOISTURE)
     }
 
-    override fun isFertile(state: BlockState, world: IBlockReader?, pos: BlockPos?): Boolean {
-        return state.get(MOISTURE) > 0
-    }
+    override fun isFertile(state: BlockState, world: IBlockReader?, pos: BlockPos?) = state.get(MOISTURE) > 0
 
     override fun canSustainPlant(
         state: BlockState,
@@ -148,9 +143,9 @@ class BonusFarmlandBlock(
         val EMPTY = object : Object2FloatMap<Supplier<Block>> {
             override fun containsKey(key: Supplier<Block>?) = false
             override fun getFloat(key: Any?) = 0.0f
-            override fun defaultReturnValue(rv: Float) = Unit
+            override fun defaultReturnValue(rv: Float) = Unit.INSTANCE
             override fun defaultReturnValue() = 0.0f
-            override fun putAll(from: Map<out Supplier<Block>, Float>) = Unit
+            override fun putAll(from: Map<out Supplier<Block>, Float>) = Unit.INSTANCE
             override fun containsValue(value: Float) = false
             override fun isEmpty() = true
             override fun object2FloatEntrySet(): ObjectSet<Object2FloatMap.Entry<Supplier<Block>>> = ObjectSets.emptySet()

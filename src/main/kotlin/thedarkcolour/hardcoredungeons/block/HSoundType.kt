@@ -15,23 +15,13 @@ class HSoundType(
     private val fallSoundIn: Supplier<SoundEvent>,
 ) : SoundType(volumeIn, pitchIn, null, null, null, null, null) {
 
-    override fun getBreakSound(): SoundEvent {
-        return breakSoundIn.get()
-    }
+    override fun getBreakSound() = breakSoundIn.get()
 
-    override fun getStepSound(): SoundEvent {
-        return stepSoundIn.get()
-    }
+    override fun getStepSound() = stepSoundIn.get()
 
-    override fun getPlaceSound(): SoundEvent {
-        return placeSoundIn.get()
-    }
+    override fun getPlaceSound() = placeSoundIn.get()
 
-    override fun getHitSound(): SoundEvent {
-        return hitSoundIn.get()
-    }
+    override fun getHitSound() = hitSoundIn.get()
 
-    override fun getFallSound(): SoundEvent {
-        return fallSoundIn.get()
-    }
+    override fun getFallSound() = fallSoundIn.get()
 }

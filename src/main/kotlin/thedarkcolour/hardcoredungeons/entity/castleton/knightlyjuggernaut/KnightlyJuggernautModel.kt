@@ -134,9 +134,8 @@ class KnightlyJuggernautModel : AgeableModel<KnightlyJuggernautEntity>(false, 24
         legRight.rotateAngleY = 0.0f
     }
 
-    private fun triangleWave(limbSwing: Float): Float {
-        return (abs(limbSwing % 13.0f - 13.0f * 0.5f) - 13.0f * 0.25f) / (13.0f * 0.25f)
-    }
+    private fun triangleWave(limbSwing: Float) =
+        (abs(limbSwing % 13.0f - 13.0f * 0.5f) - 13.0f * 0.25f) / (13.0f * 0.25f)
 
     override fun getHeadParts() = headParts
     override fun getBodyParts() = bodyParts

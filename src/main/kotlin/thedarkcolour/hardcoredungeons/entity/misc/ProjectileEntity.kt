@@ -21,9 +21,8 @@ abstract class ProjectileEntity(
         get() = func_234616_v_() as LivingEntity?
         set(shooter) = setShooter(shooter)
 
-    fun shoot(shooter: LivingEntity, pos: Vector3d, acceleration: Vector3d) {
+    fun shoot(shooter: LivingEntity, pos: Vector3d, acceleration: Vector3d) =
         this.shoot(shooter, pos.x, pos.y, pos.z, acceleration.x, acceleration.y, acceleration.z)
-    }
 
     open fun shoot(shooter: LivingEntity, x: Double, y: Double, z: Double, mX: Double, mY: Double, mZ: Double) {
         setLocationAndAngles(x, y, z, rotationYaw, rotationPitch)
@@ -38,13 +37,10 @@ abstract class ProjectileEntity(
         world.addEntity(this)
     }
 
-    override fun onImpact(result: RayTraceResult) {
-        super.onImpact(result)
-    }
+    override fun onImpact(result: RayTraceResult) = super.onImpact(result)
 
-    override fun getAttributes(): AttributeModifierMap.MutableAttribute {
-        return AttributeModifierMap.createMutableAttribute()
-    }
+    override fun getAttributes(): AttributeModifierMap.MutableAttribute =
+        AttributeModifierMap.createMutableAttribute()
 
     override fun createSpawnPacket(): IPacket<*> = NetworkHooks.getEntitySpawningPacket(this)
 

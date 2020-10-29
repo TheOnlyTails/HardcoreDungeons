@@ -14,9 +14,7 @@ class CheekyEntity(type: EntityType<out CreatureEntity>, worldIn: World) : Creat
     var isSpeaking = false
     var speech = "aaaaaaaaaaaaa"
 
-    override fun getAttributes(): AttributeModifierMap.MutableAttribute {
-        return ATTRIBUTES
-    }
+    override fun getAttributes() = ATTRIBUTES
 
     /**
      * Called frequently so the entity can update its state every tick as required. For example, zombies and skeletons

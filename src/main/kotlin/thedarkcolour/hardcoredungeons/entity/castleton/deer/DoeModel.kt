@@ -110,15 +110,11 @@ open class DoeModel : AgeableModel<CastletonDeerEntity>(false, 24.0f, 4.0f) {
 
     private val headParts = listOf(head)
 
-    override fun getHeadParts(): Iterable<ModelRenderer> {
-        return headParts
-    }
+    override fun getHeadParts() = headParts
 
     private val bodyParts = listOf(legFrontRight, legFrontLeft, legBackRight, legBackLeft, body)
 
-    override fun getBodyParts(): Iterable<ModelRenderer> {
-        return bodyParts
-    }
+    override fun getBodyParts() = bodyParts
 /*
     override fun render(
         stack: MatrixStack, buffer: IVertexBuilder, light: Int,

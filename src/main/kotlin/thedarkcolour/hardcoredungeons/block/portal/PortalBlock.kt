@@ -9,10 +9,7 @@ import net.minecraft.state.properties.BlockStateProperties
 import net.minecraft.util.Direction.*
 import net.minecraft.util.RegistryKey
 import net.minecraft.util.math.BlockPos
-import net.minecraft.util.math.shapes.IBooleanFunction
-import net.minecraft.util.math.shapes.ISelectionContext
-import net.minecraft.util.math.shapes.VoxelShape
-import net.minecraft.util.math.shapes.VoxelShapes
+import net.minecraft.util.math.shapes.*
 import net.minecraft.world.IBlockReader
 import net.minecraft.world.IWorld
 import net.minecraft.world.World
@@ -126,35 +123,41 @@ class PortalBlock(private val dimensionKey: () -> RegistryKey<World>, private va
             destination.setBlockState(endCorner.offset(DOWN), frame, 18)
         }
 
-        // get out of frame
-        startingPos = startingPos.offset(endFacing)
-        endingPos = endingPos.offset(startFacing)
+	    // get out of frame
+	    startingPos = startingPos.offset(endFacing)
+	    endingPos = endingPos.offset(startFacing)
 
-        // fill in the frame
-        for (blockPos in BlockPos.getAllInBoxMutable(startingPos.x, startingPos.y + 1, startingPos.z, endingPos.x, endingPos.y - 1, endingPos.z)) {
-            destination.setBlockState(blockPos, frame, 18)
-        }
+	    // fill in the frame
+	    for (blockPos in BlockPos.getAllInBoxMutable(startingPos.x,
+		    startingPos.y + 1,
+		    startingPos.z,
+		    endingPos.x,
+		    endingPos.y - 1,
+		    endingPos.z)) {
+		    destination.setBlockState(blockPos, frame, 18)
+	    }
     }
 
-    private fun canTeleport(state: BlockState, worldIn: World, pos: BlockPos, entityIn: Entity): Boolean {
-        return !entityIn.isPassenger && !entityIn.isBeingRidden && entityIn.isNonBoss && VoxelShapes.compare(VoxelShapes.create(entityIn.boundingBox.offset(-pos.x.toDouble(), -pos.y.toDouble(), -pos.z.toDouble())), state.getShape(worldIn, pos), IBooleanFunction.AND)
-    }
+	private fun canTeleport(state: BlockState, worldIn: World, pos: BlockPos, entityIn: Entity) =
+		!entityIn.isPassenger && !entityIn.isBeingRidden && entityIn.isNonBoss && VoxelShapes.compare(VoxelShapes.create(
+			entityIn.boundingBox.offset(-pos.x.toDouble(), -pos.y.toDouble(), -pos.z.toDouble())),
+			state.getShape(worldIn, pos),
+			IBooleanFunction.AND)
 
-    override fun fillStateContainer(builder: StateContainer.Builder<Block, BlockState>) {
-        builder.add(AXIS)
-    }
+	override fun fillStateContainer(builder: StateContainer.Builder<Block, BlockState>) {
+		builder.add(AXIS)
+	}
 
-    override fun getShape(state: BlockState, worldIn: IBlockReader, pos: BlockPos, ctx: ISelectionContext): VoxelShape {
-        return if (state.get(AXIS) == Axis.X) {
-            X_SHAPE
-        } else {
-            Z_SHAPE
-        }
-    }
+	override fun getShape(state: BlockState, worldIn: IBlockReader, pos: BlockPos, ctx: ISelectionContext): VoxelShape =
+		if (state.get(AXIS) == Axis.X) {
+			X_SHAPE
+		} else {
+			Z_SHAPE
+		}
 
-    companion object {
-        private val AXIS = BlockStateProperties.HORIZONTAL_AXIS 
-        private val X_SHAPE = makeCuboidShape(0.0, 0.0, 6.0, 16.0, 16.0, 10.0);
-        private val Z_SHAPE = makeCuboidShape(6.0, 0.0, 0.0, 10.0, 16.0, 16.0);
-    }
+	companion object {
+		private val AXIS = BlockStateProperties.HORIZONTAL_AXIS
+		private val X_SHAPE = makeCuboidShape(0.0, 0.0, 6.0, 16.0, 16.0, 10.0)
+		private val Z_SHAPE = makeCuboidShape(6.0, 0.0, 0.0, 10.0, 16.0, 16.0)
+	}
 }

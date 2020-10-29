@@ -4,10 +4,7 @@ import com.google.common.collect.ImmutableMap
 import net.minecraft.block.BlockState
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.player.PlayerEntity
-import net.minecraft.item.Item
-import net.minecraft.item.ItemStack
-import net.minecraft.item.ItemUseContext
-import net.minecraft.item.UseAction
+import net.minecraft.item.*
 import net.minecraft.nbt.NBTUtil
 import net.minecraft.util.ActionResult
 import net.minecraft.util.ActionResultType
@@ -90,9 +87,7 @@ abstract class AbstractFillingWand(properties: Properties) : Item(properties) {
      *
      * @return if the wand has a starting position selected
      */
-    protected fun hasStartPos(stack: ItemStack): Boolean {
-        return stack.getChildTag("StartPos") != null
-    }
+    protected fun hasStartPos(stack: ItemStack) = stack.getChildTag("StartPos") != null
 
     /**
      * Serializes the starting position of the current

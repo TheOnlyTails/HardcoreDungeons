@@ -18,7 +18,7 @@ import net.minecraft.world.server.ServerWorld
 import net.minecraftforge.common.ForgeHooks
 import net.minecraftforge.common.IPlantable
 import net.minecraftforge.common.PlantType
-import java.util.*
+import java.util.Random
 
 class ChiliPepperBlock(properties: Properties) : DoublePlantBlock(properties), IGrowable {
     init {
@@ -37,17 +37,14 @@ class ChiliPepperBlock(properties: Properties) : DoublePlantBlock(properties), I
         }
     }
 
-    override fun getOffsetType(): OffsetType {
-        return OffsetType.NONE
-    }
+    override fun getOffsetType() = OffsetType.NONE
 
     override fun fillStateContainer(builder: StateContainer.Builder<Block, BlockState>) {
         builder.add(HALF, AGE)
     }
 
-    override fun isValidGround(state: BlockState, worldIn: IBlockReader, pos: BlockPos): Boolean {
-        return state.block == Blocks.FARMLAND
-    }
+    override fun isValidGround(state: BlockState, worldIn: IBlockReader, pos: BlockPos) =
+        state.block == Blocks.FARMLAND
 
     /**
      * Determines if this crop is below maximum age.
@@ -59,19 +56,16 @@ class ChiliPepperBlock(properties: Properties) : DoublePlantBlock(properties), I
      *
      * @return if the plant is visually taller than 1 block.
      */
-    private fun isTall(worldIn: IBlockReader, pos: BlockPos, state: BlockState): Boolean {
-        return if (state.get(HALF) == DoubleBlockHalf.LOWER) {
+    private fun isTall(worldIn: IBlockReader, pos: BlockPos, state: BlockState) =
+        if (state.get(HALF) == DoubleBlockHalf.LOWER) {
             worldIn.getBlockState(pos.up()).get(AGE) < 4
         } else {
             state.get(AGE) < 4
         }
-    }
 
     override fun canGrow(worldIn: IBlockReader, pos: BlockPos, state: BlockState, isClient: Boolean) = isNotMaxAge(state)
 
-    override fun canUseBonemeal(worldIn: World, rand: Random, pos: BlockPos, state: BlockState): Boolean {
-        return true
-    }
+    override fun canUseBonemeal(worldIn: World, rand: Random, pos: BlockPos, state: BlockState) = true
 
     override fun grow(worldIn: ServerWorld, rand: Random, pos: BlockPos, state: BlockState) {
         val growth = (state.get(AGE) + MathHelper.nextInt(rand, 3, 6)).coerceAtMost(10)
@@ -147,9 +141,7 @@ class ChiliPepperBlock(properties: Properties) : DoublePlantBlock(properties), I
         return f
     }
 
-    override fun getPlantType(world: IBlockReader?, pos: BlockPos?): PlantType {
-        return PlantType.CROP
-    }
+    override fun getPlantType(world: IBlockReader?, pos: BlockPos?) = PlantType.CROP
 
     override fun getStateForPlacement(context: BlockItemUseContext): BlockState? {
         val pos = context.pos.up()

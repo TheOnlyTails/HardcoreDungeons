@@ -10,7 +10,5 @@ import net.minecraft.util.ResourceLocation
 open class FullbrightLayer<T : LivingEntity, M : EntityModel<T>>(renderer: IEntityRenderer<T, M>, location: ResourceLocation) : AbstractEyesLayer<T, M>(renderer) {
     private val eyesTexture = RenderType.getEyes(location)
 
-    override fun getRenderType(): RenderType {
-        return eyesTexture
-    }
+    override fun getRenderType(): RenderType = eyesTexture
 }

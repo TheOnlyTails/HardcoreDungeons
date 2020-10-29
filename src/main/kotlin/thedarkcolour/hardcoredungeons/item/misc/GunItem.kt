@@ -2,10 +2,7 @@ package thedarkcolour.hardcoredungeons.item.misc
 
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.player.PlayerEntity
-import net.minecraft.item.Item
-import net.minecraft.item.ItemStack
-import net.minecraft.item.ShootableItem
-import net.minecraft.item.UseAction
+import net.minecraft.item.*
 import net.minecraft.util.ActionResult
 import net.minecraft.util.Hand
 import net.minecraft.world.World
@@ -48,16 +45,12 @@ open class GunItem(
      * @param stack The ItemStack
      * @return The maximum number this item can be stacked to
      */
-    override fun getItemStackLimit(stack: ItemStack?): Int {
-        return 1
-    }
+    override fun getItemStackLimit(stack: ItemStack?) = 1
 
     /**
      * returns the action that specifies what animation to play when the items is being used
      */
-    override fun getUseAction(stack: ItemStack): UseAction {
-        return UseAction.BOW
-    }
+    override fun getUseAction(stack: ItemStack) = UseAction.BOW
 
     /**
      * How long it takes to use or consume an item
@@ -98,17 +91,11 @@ open class GunItem(
         return stack
     }
 
-    override fun getInventoryAmmoPredicate(): Predicate<ItemStack> {
-        return Predicate(getAmmoItem()::isItemEqual)
-    }
+    override fun getInventoryAmmoPredicate() = Predicate(getAmmoItem()::isItemEqual)
 
-    open fun getAmmoItem(): ItemStack {
-        return ItemStack(HItems.BULLET)
-    }
+    open fun getAmmoItem() = ItemStack(HItems.BULLET)
 
-    override fun func_230305_d_(): Int {
-        return 10 // doesn't really matter because we aren't going to shoot
-    }
+    override fun func_230305_d_() = 10 // doesn't really matter because we aren't going to shoot
 
     class GunProperties : Properties() {
         private var bulletDamage = 0.0f

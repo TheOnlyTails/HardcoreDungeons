@@ -17,18 +17,15 @@ import net.minecraft.world.gen.ChunkGenerator
 import net.minecraft.world.gen.GenerationStage
 import net.minecraft.world.gen.Heightmap
 import net.minecraft.world.gen.feature.NoFeatureConfig
-import net.minecraft.world.gen.feature.structure.Structure
+import net.minecraft.world.gen.feature.structure.*
 import net.minecraft.world.gen.feature.structure.Structure.IStartFactory
-import net.minecraft.world.gen.feature.structure.StructureManager
-import net.minecraft.world.gen.feature.structure.StructureStart
-import net.minecraft.world.gen.feature.structure.TemplateStructurePiece
 import net.minecraft.world.gen.feature.template.PlacementSettings
 import net.minecraft.world.gen.feature.template.Template
 import net.minecraft.world.gen.feature.template.TemplateManager
 import thedarkcolour.hardcoredungeons.registry.HStructures
 import thedarkcolour.hardcoredungeons.registry.setRegistryKey
 import thedarkcolour.hardcoredungeons.util.modLoc
-import java.util.*
+import java.util.Random
 
 /**
  * Simple structure template that will be used for many structures in the mod.
@@ -53,9 +50,7 @@ class SimpleStructure(structureID: String, addPieces: (MutableMap<Vector3i, Reso
     override fun getStartFactory() = IStartFactory(::Start)
 
     // todo make a property
-    override fun func_236396_f_(): GenerationStage.Decoration {
-        return GenerationStage.Decoration.SURFACE_STRUCTURES
-    }
+    override fun func_236396_f_() = GenerationStage.Decoration.SURFACE_STRUCTURES
 
     companion object {
         // structure name should match piece name

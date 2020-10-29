@@ -41,8 +41,6 @@ class CheekyModel : EntityModel<CheekyEntity>() {
 
         }
 
-        override fun shouldExecute(): Boolean {
-            return entity.isSpeaking
-        }
+        override fun shouldExecute() = entity.isSpeaking
     }
 }

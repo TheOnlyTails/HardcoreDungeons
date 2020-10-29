@@ -81,13 +81,9 @@ class SmallBulletEntity(type: EntityType<out ProjectileEntity>, worldIn: World) 
         }
     }
 
-    private fun invertMotion(motion: Double): Double {
-        return -1.0 / motion
-    }
+    private fun invertMotion(motion: Double) = -1.0 / motion
 
-    override fun getItem(): ItemStack {
-        return ICON
-    }
+    override fun getItem() = ICON
 
     companion object {
         private val ICON = ItemStack(HItems.BULLET)

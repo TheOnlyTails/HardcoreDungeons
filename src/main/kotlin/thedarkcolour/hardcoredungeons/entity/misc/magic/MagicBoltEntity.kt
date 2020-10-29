@@ -67,9 +67,7 @@ class MagicBoltEntity(type: EntityType<out ProjectileEntity>, worldIn: World) : 
         }
     }
 
-    override fun getItem(): ItemStack {
-        return ICON
-    }
+    override fun getItem() = ICON
 
     companion object {
         private val ICON = ItemStack(Items.MAGMA_CREAM)

@@ -106,9 +106,8 @@ object ASMHooks {
      * @return the next Opcode in the list after this one.
      */
     @JvmStatic
-    private fun AbstractInsnNode.nextInsn(insnList: InsnList, aheadIndex: Int = 1): AbstractInsnNode {
-        return insnList[insnList.indexOf(this) + aheadIndex]
-    }
+    private fun AbstractInsnNode.nextInsn(insnList: InsnList, aheadIndex: Int = 1) =
+        insnList[insnList.indexOf(this) + aheadIndex]
 
     /**
      * Used to patch the biome generation layer.

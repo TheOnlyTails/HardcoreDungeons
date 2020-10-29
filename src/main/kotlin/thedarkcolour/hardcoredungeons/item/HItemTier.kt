@@ -37,27 +37,15 @@ enum class HItemTier(
         repairMaterialTag: Tags.IOptionalNamedTag<Item>
     ) : this(harvestLevel, durability, efficiency, damage, enchantability, LazyValue { Ingredient.fromTag(repairMaterialTag) })
 
-    override fun getRepairMaterial(): Ingredient {
-        return repairMaterial.value
-    }
+    override fun getRepairMaterial(): Ingredient = repairMaterial.value
 
-    override fun getHarvestLevel(): Int {
-        return harvestLevel
-    }
+    override fun getHarvestLevel() = harvestLevel
 
-    override fun getMaxUses(): Int {
-        return durability
-    }
+    override fun getMaxUses() = durability
 
-    override fun getAttackDamage(): Float {
-        return damage
-    }
+    override fun getAttackDamage() = damage
 
-    override fun getEnchantability(): Int {
-        return enchantability
-    }
+    override fun getEnchantability() = enchantability
 
-    override fun getEfficiency(): Float {
-        return efficiency
-    }
+    override fun getEfficiency() = efficiency
 }

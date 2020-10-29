@@ -7,9 +7,7 @@ import net.minecraft.util.ResourceLocation
 
 class MagicBoltRenderer<T : Entity>(manager: EntityRendererManager) : EntityRenderer<T>(manager) {
 
-    override fun getEntityTexture(entity: T): ResourceLocation {
-        return PIG_TEXTURES
-    }
+    override fun getEntityTexture(entity: T) = PIG_TEXTURES
 
     companion object {
         private val PIG_TEXTURES = ResourceLocation("textures/entity/pig/pig.png")

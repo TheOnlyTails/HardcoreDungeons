@@ -107,9 +107,8 @@ class SpawnerChestBlock(properties: HProperties) : HBlock(properties), IWaterLog
         } else null
     }
 
-    override fun getFluidState(state: BlockState): FluidState {
-        return if (state.get(WATERLOGGED)) Fluids.WATER.getStillFluidState(false) else Fluids.EMPTY.defaultState
-    }
+    override fun getFluidState(state: BlockState): FluidState =
+        if (state.get(WATERLOGGED)) Fluids.WATER.getStillFluidState(false) else Fluids.EMPTY.defaultState
 
     override fun onBlockActivated(
         state: BlockState,
@@ -117,19 +116,15 @@ class SpawnerChestBlock(properties: HProperties) : HBlock(properties), IWaterLog
         pos: BlockPos,
         playerIn: PlayerEntity,
         handIn: Hand,
-        hit: BlockRayTraceResult
-    ): ActionResultType {
-        return if (worldIn.isRemote()) {
-            ActionResultType.SUCCESS
-        } else {
-            HContainers.DUNGEON_LOOT.openContainer(playerIn)
-            ActionResultType.SUCCESS
-        }
+        hit: BlockRayTraceResult,
+    ) = if (worldIn.isRemote()) {
+        ActionResultType.SUCCESS
+    } else {
+        HContainers.DUNGEON_LOOT.openContainer(playerIn)
+        ActionResultType.SUCCESS
     }
 
-    override fun allowsMovement(state: BlockState, worldIn: IBlockReader, pos: BlockPos, type: PathType): Boolean {
-        return false
-    }
+    override fun allowsMovement(state: BlockState, worldIn: IBlockReader, pos: BlockPos, type: PathType) = false
 
     override fun fillStateContainer(builder: StateContainer.Builder<Block, BlockState>) {
         builder.add(HORIZONTAL_FACING, CHEST_TYPE, WATERLOGGED)

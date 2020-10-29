@@ -27,16 +27,19 @@ open class HBlock(properties: HProperties) : Block(properties.build()) {
     /**
      * Returns the enchantment power bonus of this block. (Bookshelf returns 1)
      */
-    override fun getEnchantPowerBonus(state: BlockState?, world: IWorldReader?, pos: BlockPos?): Float {
-        return enchantmentPower
-    }
+    override fun getEnchantPowerBonus(state: BlockState?, world: IWorldReader?, pos: BlockPos?) =
+        enchantmentPower
 
     /**
      * Returns the collision and selection shape of this block.
      */
-    override fun getShape(state: BlockState?, worldIn: IBlockReader?, pos: BlockPos?, ctx: ISelectionContext?): VoxelShape {
-        return shape
-    }
+    override fun getShape(
+        state: BlockState?,
+        worldIn: IBlockReader?,
+        pos: BlockPos?,
+        ctx: ISelectionContext?,
+    ): VoxelShape =
+        shape
 
     /**
      * Writes the properties of this block to the supplied [HProperties]/

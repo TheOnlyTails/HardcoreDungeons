@@ -25,9 +25,7 @@ class ExtractorTileEntity : TileEntity(TODO("Add the tile entity type here")), I
         }
     }
 
-    override fun canInteractWith(playerIn: PlayerEntity): Boolean {
-        return isTileWithinDistance(this, playerIn)
-    }
+    override fun canInteractWith(playerIn: PlayerEntity) = isTileWithinDistance(this, playerIn)
 
     override fun tick() {
         if (!inventory[0].isEmpty && !inventory[1].isEmpty) {
@@ -76,8 +74,5 @@ class ExtractorTileEntity : TileEntity(TODO("Add the tile entity type here")), I
         inventory[0].shrink(1)
     }
 
-    fun isBurning(): Boolean {
-        // good
-        return burnTime != 0
-    }
+    private fun isBurning() = /* good */ burnTime != 0
 }

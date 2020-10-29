@@ -2,10 +2,7 @@ package thedarkcolour.hardcoredungeons.entity
 
 import com.google.common.collect.ImmutableSet
 import net.minecraft.block.Block
-import net.minecraft.entity.Entity
-import net.minecraft.entity.EntityClassification
-import net.minecraft.entity.EntitySize
-import net.minecraft.entity.EntityType
+import net.minecraft.entity.*
 import net.minecraft.entity.ai.attributes.AttributeModifierMap
 import net.minecraft.util.ResourceLocation
 import net.minecraft.world.World
@@ -54,9 +51,7 @@ class HEntityType<T>(
         registryName = id
     }
 
-    operator fun invoke(worldIn: World): T {
-        return create(worldIn)!!
-    }
+    operator fun invoke(worldIn: World): T = create(worldIn)!!
 
     interface HEntity {
         fun getAttributes(): AttributeModifierMap.MutableAttribute

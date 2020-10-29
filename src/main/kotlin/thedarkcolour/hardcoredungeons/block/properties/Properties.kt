@@ -2,10 +2,7 @@
 
 package thedarkcolour.hardcoredungeons.block.properties
 
-import net.minecraft.block.AbstractBlock
-import net.minecraft.block.Block
-import net.minecraft.block.BlockState
-import net.minecraft.block.SoundType
+import net.minecraft.block.*
 import net.minecraft.block.material.Material
 import net.minecraft.block.material.MaterialColor
 import net.minecraft.item.DyeColor
@@ -106,9 +103,7 @@ abstract class Properties<T : Properties<T>> protected constructor() {
     /**
      * Set this block to drop instantly and to never survive explosions.
      */
-    fun zeroHardnessAndResistance(): T {
-        return hardnessAndResistance(0.0f, 0.0f)
-    }
+    fun zeroHardnessAndResistance() = hardnessAndResistance(0.0f, 0.0f)
 
     /**
      * Set the hardness and resistance for this block.
@@ -185,9 +180,7 @@ abstract class Properties<T : Properties<T>> protected constructor() {
     /**
      * Returns the shape of this block.
      */
-    fun getShape(): VoxelShape? {
-        return shape
-    }
+    fun getShape() = shape
 
     /**
      * Set the enchantment power for this block.
@@ -200,16 +193,12 @@ abstract class Properties<T : Properties<T>> protected constructor() {
     /**
      * Returns the enchantment power bonus of this block.
      */
-    fun getEnchantmentPower(): Float {
-        return enchantmentPower
-    }
+    fun getEnchantmentPower() = enchantmentPower
 
     /**
      * Returns a Block.Properties for use in vanilla blocks.
      */
-    fun build(): AbstractBlock.Properties {
-        return internal
-    }
+    fun build() = internal
 
     /**
      * The factory that should be a companion object of

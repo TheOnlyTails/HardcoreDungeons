@@ -7,7 +7,7 @@ import net.minecraft.nbt.CompoundNBT
 import net.minecraft.nbt.ListNBT
 import net.minecraftforge.common.util.Constants
 import net.minecraftforge.items.ItemHandlerHelper
-import java.util.*
+import java.util.Arrays
 
 /**
  * todo redo
@@ -69,18 +69,14 @@ open class DarkInventory constructor(size: Int, defaultName: String? = null) : I
      * Only works if the Slot is [SlotDarkInventory]
      * @see SlotDarkInventory.canTakeStack
      */
-    override fun canTakeStack(slot: Int, playerIn: PlayerEntity): Boolean {
-        return true
-    }
+    override fun canTakeStack(slot: Int, playerIn: PlayerEntity) = true
 
     /**
      * React when an item is taken by [playerIn] from a slot.
      * Only works if the Slot is [SlotDarkInventory]
      * @see SlotDarkInventory.onTake
      */
-    override fun onTake(slot: Int, playerIn: PlayerEntity, stack: ItemStack): ItemStack {
-        return stack
-    }
+    override fun onTake(slot: Int, playerIn: PlayerEntity, stack: ItemStack) = stack
 
     override fun extractItem(slot: Int, amount: Int, simulate: Boolean): ItemStack {
         if (amount == 0) {
@@ -153,9 +149,7 @@ open class DarkInventory constructor(size: Int, defaultName: String? = null) : I
     /**
      * Iterable implementation for the contents of this [DarkInventory]
      */
-    override fun iterator(): Iterator<ItemStack> {
-        return stacks.iterator()
-    }
+    override fun iterator() = stacks.iterator()
 
     /**
      * React after contents have changed.

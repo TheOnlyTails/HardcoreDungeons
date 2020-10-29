@@ -9,7 +9,7 @@ import net.minecraft.world.World
 import thedarkcolour.hardcoredungeons.block.properties.HProperties
 import thedarkcolour.hardcoredungeons.registry.HBlocks
 import thedarkcolour.hardcoredungeons.registry.HParticles
-import java.util.*
+import java.util.Random
 
 class LumlightCampfireBlock(properties: HProperties) : CampfireBlock(true, 2, properties.build()) {
     override fun animateTick(stateIn: BlockState, worldIn: World, pos: BlockPos, rand: Random) {
@@ -42,7 +42,5 @@ class LumlightCampfireBlock(properties: HProperties) : CampfireBlock(true, 2, pr
         }
     }
 
-    override fun isHayBlock(state: BlockState): Boolean {
-        return state.block == HBlocks.CRACKED_CASTLETON_BRICKS
-    }
+    override fun isHayBlock(state: BlockState) = state.block == HBlocks.CRACKED_CASTLETON_BRICKS
 }

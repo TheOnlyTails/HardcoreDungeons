@@ -14,7 +14,7 @@ import net.minecraftforge.client.model.ModelLoader
 import net.minecraftforge.client.model.data.EmptyModelData
 import net.minecraftforge.client.model.obj.OBJLoader
 import net.minecraftforge.client.model.obj.OBJModel.ModelSettings
-import java.util.*
+import java.util.Random
 import java.util.function.Function
 
 // credit to gigaherz
@@ -69,46 +69,27 @@ class ModelHandle(modelLocation: ResourceLocation) {
     }
 
     private class FakeModelConfiguration(private val modelLocation: ResourceLocation) : IModelConfiguration {
-        override fun getOwnerModel(): IUnbakedModel? {
-            return null
-        }
+        override fun getOwnerModel(): IUnbakedModel? = null
 
-        override fun getModelName(): String {
-            return modelLocation.toString()
-        }
+        override fun getModelName() = modelLocation.toString()
 
-        override fun isTexturePresent(name: String): Boolean {
-            return false
-        }
+        override fun isTexturePresent(name: String) = false
 
-        override fun resolveTexture(name: String): RenderMaterial {
-            return RenderMaterial(FakeSprite.LOCATION, FakeSprite.LOCATION)
-        }
+        override fun resolveTexture(name: String) =
+            RenderMaterial(FakeSprite.LOCATION, FakeSprite.LOCATION)
 
-        override fun isShadedInGui(): Boolean {
-            return true
-        }
+        override fun isShadedInGui() = true
 
-        override fun isSideLit(): Boolean {
-            return true
-        }
+        override fun isSideLit() = true
 
-        override fun useSmoothLighting(): Boolean {
-            return true
-        }
+        override fun useSmoothLighting() = true
 
-        override fun getCameraTransforms(): ItemCameraTransforms {
-            return ItemCameraTransforms.DEFAULT
-        }
+        override fun getCameraTransforms(): ItemCameraTransforms = ItemCameraTransforms.DEFAULT
 
-        override fun getCombinedTransform(): IModelTransform {
-            return ModelRotation.X0_Y0
-        }
+        override fun getCombinedTransform(): IModelTransform = ModelRotation.X0_Y0
     }
 
     companion object {
-        fun of(modelLocation: String): ModelHandle {
-            return ModelHandle(ResourceLocation(modelLocation))
-        }
+        fun of(modelLocation: String) = ModelHandle(ResourceLocation(modelLocation))
     }
 }

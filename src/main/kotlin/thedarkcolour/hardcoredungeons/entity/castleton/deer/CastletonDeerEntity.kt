@@ -31,9 +31,7 @@ class CastletonDeerEntity(type: EntityType<CastletonDeerEntity>, worldIn: World)
      * Checks if the parameter is an item which this animal can be fed to breed it (wheat, carrots or seeds depending on
      * the animal type)
      */
-    override fun isBreedingItem(stack: ItemStack): Boolean {
-        return stack.item == HItems.WILD_BERROOK
-    }
+    override fun isBreedingItem(stack: ItemStack) = stack.item == HItems.WILD_BERROOK
 
     override fun registerGoals() {
         goalSelector.addGoal(0, WaterAvoidingRandomWalkingGoal(this, 0.4))

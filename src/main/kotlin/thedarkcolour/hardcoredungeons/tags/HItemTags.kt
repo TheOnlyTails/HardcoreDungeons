@@ -15,7 +15,6 @@ object HItemTags {
     val RED_WINE = makeWrapper("red_wine")
     val LUMLIGHT_LOGS = makeWrapper("lumlight_logs")
 
-    private fun makeWrapper(tag: String): ITag.INamedTag<Item> {
-        return ItemTags.makeWrapperTag(HardcoreDungeons.ID + ":" + tag)
-    }
+    private fun makeWrapper(tag: String): ITag.INamedTag<Item> =
+        ItemTags.makeWrapperTag("${HardcoreDungeons.ID}:$tag")
 }

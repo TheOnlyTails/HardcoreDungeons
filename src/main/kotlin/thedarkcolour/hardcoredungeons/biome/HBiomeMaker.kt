@@ -223,67 +223,55 @@ object HBiomeMaker {
         effects: BiomeAmbience.Builder,
         genSettings: BiomeGenerationSettings.Builder,
         spawnSettings: MobSpawnInfo = MobSpawnInfo.EMPTY,
-    ): Biome {
-        return Biome.Builder()
-            .precipitation(precipitation)
-            .category(category)
-            .depth(depth)
-            .scale(scale)
-            .temperature(temperature)
-            .downfall(downfall)
-            .setEffects(effects.build())
-            .withGenerationSettings(genSettings.build())
-            .withMobSpawnSettings(spawnSettings)
-            .build()
-    }
+    ): Biome = Biome.Builder()
+        .precipitation(precipitation)
+        .category(category)
+        .depth(depth)
+        .scale(scale)
+        .temperature(temperature)
+        .downfall(downfall)
+        .setEffects(effects.build())
+        .withGenerationSettings(genSettings.build())
+        .withMobSpawnSettings(spawnSettings)
+        .build()
 
     /**
      * Biome ambience with default parameters and enforced the required ones.
      * Should prevent slip ups on my part :)
      */
-    fun effects(
+    private fun effects(
         waterColor: Int,
         waterFogColor: Int,
         skyColor: Int,
         skyFogColor: Int,
-    ): BiomeAmbience.Builder {
-        return BiomeAmbience.Builder()
-            .setWaterColor(waterColor)
-            .setWaterFogColor(waterFogColor)
-            .withSkyColor(skyColor)
-            .setFogColor(skyFogColor)
-    }
+    ) = BiomeAmbience.Builder()
+        .setWaterColor(waterColor)
+        .setWaterFogColor(waterFogColor)
+        .withSkyColor(skyColor)
+        .setFogColor(skyFogColor)
 
     /** Shortcut function and enforces surface builder */
-    fun <C : ISurfaceBuilderConfig> genSettings(surfaceBuilder: SurfaceBuilder<C>, config: C): BiomeGenerationSettings.Builder {
-        return BiomeGenerationSettings.Builder().withSurfaceBuilder(surfaceBuilder.func_242929_a(config))
-    }
+    private fun <C : ISurfaceBuilderConfig> genSettings(surfaceBuilder: SurfaceBuilder<C>, config: C) =
+        BiomeGenerationSettings.Builder().withSurfaceBuilder(surfaceBuilder.func_242929_a(config))
 
     /** Shortcut function and enforces surface builder */
-    fun <C : ISurfaceBuilderConfig> genSettings(surfaceBuilder: ConfiguredSurfaceBuilder<C>): BiomeGenerationSettings.Builder {
-        return BiomeGenerationSettings.Builder().withSurfaceBuilder(surfaceBuilder)
-    }
+    private fun <C : ISurfaceBuilderConfig> genSettings(surfaceBuilder: ConfiguredSurfaceBuilder<C>) =
+        BiomeGenerationSettings.Builder().withSurfaceBuilder(surfaceBuilder)
 
     /** Shortcut function */
-    fun spawnSettings(): MobSpawnInfo.Builder {
-        return MobSpawnInfo.Builder()
-    }
+    private fun spawnSettings() = MobSpawnInfo.Builder()
 
     /** Just for consistency why the fuck is it not build */
-    fun MobSpawnInfo.Builder.build(): MobSpawnInfo {
-        return copy()
-    }
+    fun MobSpawnInfo.Builder.build(): MobSpawnInfo = copy()
 
     /** Shortcut function */
-    fun MobSpawnInfo.Builder.addSpawn(
+    private fun MobSpawnInfo.Builder.addSpawn(
         classification: EntityClassification,
         entityType: EntityType<*>,
         weight: Int,
         min: Int,
-        max: Int
-    ): MobSpawnInfo.Builder {
-        return withSpawner(classification, MobSpawnInfo.Spawners(entityType, weight, min, max))
-    }
+        max: Int,
+    ) = withSpawner(classification, MobSpawnInfo.Spawners(entityType, weight, min, max))
 
     private fun getSkyForTemp(temperature: Float): Int {
         val a = MathHelper.clamp(temperature / 3.0f, -1.0f, 1.0f)

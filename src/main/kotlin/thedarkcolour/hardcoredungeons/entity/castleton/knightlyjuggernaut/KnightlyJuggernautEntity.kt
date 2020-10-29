@@ -8,7 +8,6 @@ import net.minecraft.world.server.ServerWorld
 import thedarkcolour.hardcoredungeons.registry.HEntities
 
 class KnightlyJuggernautEntity(type: EntityType<KnightlyJuggernautEntity>, worldIn: World) : AnimalEntity(type, worldIn) {
-    override fun func_241840_a(worldIn: ServerWorld, ageable: AgeableEntity): KnightlyJuggernautEntity {
-        return HEntities.KNIGHTLY_JUGGERNAUT.create(world)!!
-    }
+    override fun func_241840_a(worldIn: ServerWorld, ageable: AgeableEntity) =
+        HEntities.KNIGHTLY_JUGGERNAUT.create(world)!!
 }

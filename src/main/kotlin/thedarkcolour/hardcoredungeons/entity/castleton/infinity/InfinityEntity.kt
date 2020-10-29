@@ -25,13 +25,11 @@ class InfinityEntity(entityType: EntityType<out LivingEntity>, worldIn: World) :
         return emptyList()
     }
 
-    override fun setItemStackToSlot(slotIn: EquipmentSlotType, stack: ItemStack) = Unit
+    override fun setItemStackToSlot(slotIn: EquipmentSlotType, stack: ItemStack): Unit = Unit.INSTANCE
 
     override fun getItemStackFromSlot(slotIn: EquipmentSlotType): ItemStack = ItemStack.EMPTY
 
-    override fun getPrimaryHand(): HandSide {
-        return HandSide.LEFT
-    }
+    override fun getPrimaryHand() = HandSide.LEFT
 
     override fun attackEntityFrom(source: DamageSource, damage: Float): Boolean {
         return if (source.trueSource != source.immediateSource) {
@@ -46,14 +44,10 @@ class InfinityEntity(entityType: EntityType<out LivingEntity>, worldIn: World) :
     /**
      * Find the trajectory from the boss to the player
      */
-    fun getTrajectory(target: PlayerEntity): Vector3d {
-        return target.positionVec.subtract(positionVec)
-    }
+    fun getTrajectory(target: PlayerEntity): Vector3d = target.positionVec.subtract(positionVec)
 
     open class InfinityGoal(val infinity: InfinityEntity) : Goal() {
-        override fun shouldExecute(): Boolean {
-            return !infinity.isIdle && infinity.engagedPlayer != null
-        }
+        override fun shouldExecute() = !infinity.isIdle && infinity.engagedPlayer != null
     }
 
     class AwaitPlayerAI {
@@ -64,9 +58,7 @@ class InfinityEntity(entityType: EntityType<out LivingEntity>, worldIn: World) :
         /** The duration of this task in ticks */
         var progress = 0
 
-        override fun shouldContinueExecuting(): Boolean {
-            return shouldExecute() && progress++ < 200
-        }
+        override fun shouldContinueExecuting() = shouldExecute() && progress++ < 200
 
         override fun resetTask() {
             progress = 0
@@ -83,5 +75,5 @@ class InfinityEntity(entityType: EntityType<out LivingEntity>, worldIn: World) :
         }
     }
 
-    class CrossAttack()
+    class CrossAttack
 }

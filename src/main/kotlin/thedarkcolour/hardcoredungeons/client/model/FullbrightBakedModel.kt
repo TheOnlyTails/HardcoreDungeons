@@ -13,7 +13,8 @@ import net.minecraft.client.renderer.texture.TextureAtlasSprite
 import net.minecraft.util.Direction
 import net.minecraft.util.ResourceLocation
 import net.minecraftforge.client.model.data.EmptyModelData
-import java.util.*
+import java.util.ArrayList
+import java.util.Random
 
 // thanks to commoble and raoulvdberge
 class FullbrightBakedModel(private val base: IBakedModel, private val fullbrightSprites: Set<ResourceLocation>) : IBakedModel {
@@ -22,30 +23,18 @@ class FullbrightBakedModel(private val base: IBakedModel, private val fullbright
         return QUAD_CACHE.getUnchecked(CacheKey(state ?: return base.getQuads(state, side, rand), side, base, fullbrightSprites, rand))
     }
 
-    override fun isBuiltInRenderer(): Boolean {
-        return base.isBuiltInRenderer
-    }
+    override fun isBuiltInRenderer() = base.isBuiltInRenderer
 
-    override fun isAmbientOcclusion(): Boolean {
-        return base.isAmbientOcclusion
-    }
+    override fun isAmbientOcclusion() = base.isAmbientOcclusion
 
-    override fun isGui3d(): Boolean {
-        return base.isGui3d
-    }
+    override fun isGui3d() = base.isGui3d
 
-    override fun isSideLit(): Boolean {
-        return base.isSideLit
-    }
+    override fun isSideLit() = base.isSideLit
 
-    override fun getOverrides(): ItemOverrideList {
-        return base.overrides
-    }
+    override fun getOverrides(): ItemOverrideList = base.overrides
 
     @Suppress("DEPRECATION")
-    override fun getParticleTexture(): TextureAtlasSprite {
-        return base.particleTexture
-    }
+    override fun getParticleTexture(): TextureAtlasSprite = base.particleTexture
 
     companion object {
         private val QUAD_CACHE = CacheBuilder.newBuilder().build(object : CacheLoader<CacheKey, List<BakedQuad>>() {
@@ -111,17 +100,13 @@ class FullbrightBakedModel(private val base: IBakedModel, private val fullbright
         val textures: Set<ResourceLocation>,
         val rand: Random,
     ) {
-        override fun equals(other: Any?): Boolean {
-            return when {
-                this === other -> true
-                other !is CacheKey -> false
-                side == other.side && state == other.state -> true
-                else -> false
-            }
+        override fun equals(other: Any?) = when {
+            this === other -> true
+            other !is CacheKey -> false
+            side == other.side && state == other.state -> true
+            else -> false
         }
 
-        override fun hashCode(): Int {
-            return state.hashCode() + 113 * (side?.hashCode() ?: 0)
-        }
+        override fun hashCode() = state.hashCode() + 113 * (side?.hashCode() ?: 0)
     }
 }

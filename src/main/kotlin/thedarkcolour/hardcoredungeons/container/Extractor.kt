@@ -10,11 +10,8 @@ import thedarkcolour.hardcoredungeons.registry.HRecipes
  * Shared code for the extractor
  */
 interface Extractor {
-    fun isValidInput(world: World, stack: ItemStack): Boolean {
-        return world.recipeManager.getRecipe(HRecipes.EXTRACTION, Inventory(stack), world).isPresent
-    }
+    fun isValidInput(world: World, stack: ItemStack) =
+        world.recipeManager.getRecipe(HRecipes.EXTRACTION, Inventory(stack), world).isPresent
 
-    fun isValidFuel(world: World, stack: ItemStack): Boolean {
-        return stack.item == HItems.LUM
-    }
+    fun isValidFuel(world: World, stack: ItemStack) = stack.item == HItems.LUM
 }

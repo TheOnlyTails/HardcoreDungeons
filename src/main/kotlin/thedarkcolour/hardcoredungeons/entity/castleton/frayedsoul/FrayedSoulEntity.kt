@@ -6,7 +6,6 @@ import net.minecraft.entity.ai.goal.Goal
 import net.minecraft.entity.ai.goal.LookAtGoal
 import net.minecraft.entity.ai.goal.WaterAvoidingRandomWalkingGoal
 import net.minecraft.entity.player.PlayerEntity
-import net.minecraft.util.SoundEvent
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
 import thedarkcolour.hardcoredungeons.registry.HBlocks
@@ -25,13 +24,7 @@ class FrayedSoulEntity(type: EntityType<FrayedSoulEntity>, worldIn: World) : Cre
         getAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).baseValue = 0.24
     }*/
 
-    override fun registerData() {
-        super.registerData()
-    }
-
-    override fun getAmbientSound(): SoundEvent {
-        return HSounds.ENTITY_FRAYED_SOUL_IDLE
-    }
+    override fun getAmbientSound() = HSounds.ENTITY_FRAYED_SOUL_IDLE
 
     class FindBlueLumshroomGoal(private val entity: FrayedSoulEntity) : Goal() {
         override fun shouldExecute(): Boolean {
@@ -68,12 +61,10 @@ class FrayedSoulEntity(type: EntityType<FrayedSoulEntity>, worldIn: World) : Cre
     }
 
     class WanderGoal(entity: FrayedSoulEntity) : WaterAvoidingRandomWalkingGoal(entity, 0.5) {
-        override fun shouldExecute(): Boolean {
-            return super.shouldExecute() && creature.world.getBlockState(creature.position).block != HBlocks.BLUE_LUMSHROOM
-        }
+        override fun shouldExecute() =
+            super.shouldExecute() && creature.world.getBlockState(creature.position).block != HBlocks.BLUE_LUMSHROOM
 
-        override fun shouldContinueExecuting(): Boolean {
-            return super.shouldContinueExecuting() && creature.world.getBlockState(creature.position).block != HBlocks.BLUE_LUMSHROOM
-        }
+        override fun shouldContinueExecuting() =
+            super.shouldContinueExecuting() && creature.world.getBlockState(creature.position).block != HBlocks.BLUE_LUMSHROOM
     }
 }

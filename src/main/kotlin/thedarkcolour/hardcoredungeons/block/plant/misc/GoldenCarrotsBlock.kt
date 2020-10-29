@@ -1,10 +1,7 @@
 package thedarkcolour.hardcoredungeons.block.plant.misc
 
 import net.minecraft.block.CarrotBlock
-import net.minecraft.item.BlockItem
-import net.minecraft.item.Item
-import net.minecraft.item.ItemUseContext
-import net.minecraft.item.Items
+import net.minecraft.item.*
 import net.minecraft.util.Direction
 import net.minecraft.util.IItemProvider
 import net.minecraft.util.math.BlockRayTraceResult
@@ -16,9 +13,7 @@ class GoldenCarrotsBlock(properties: Properties) : CarrotBlock(properties) {
         BlockItem.BLOCK_TO_ITEM[HBlocks.GOLDEN_CARROTS] = Items.GOLDEN_CARROT
     }
 
-    override fun getSeedsItem(): IItemProvider {
-        return Items.GOLDEN_CARROT
-    }
+    override fun getSeedsItem(): IItemProvider = Items.GOLDEN_CARROT
 
     companion object {
         private val PLACER by lazy {

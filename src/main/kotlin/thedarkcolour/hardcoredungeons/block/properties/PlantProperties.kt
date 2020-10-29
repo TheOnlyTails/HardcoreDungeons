@@ -51,13 +51,9 @@ class PlantProperties private constructor() : Properties<PlantProperties>() {
      * The factory that should be a companion object of
      * the implementing [Properties] class
      */
-    override fun getFactory(): Factory<PlantProperties> {
-        return Companion
-    }
+    override fun getFactory() = Companion
 
     companion object : Factory<PlantProperties>() {
-        override fun createProperties(): PlantProperties {
-            return PlantProperties()
-        }
+        override fun createProperties() = PlantProperties()
     }
 }

@@ -19,7 +19,6 @@ object HBlockTags {
     val FENCES_BRICK = tag("fences/rainbow")
     val CASTLETON_GRASS_PLANTABLE = tag("castleton_grass_plantable")
 
-    private fun tag(name: String): ITag.INamedTag<Block> {
-        return BlockTags.makeWrapperTag(HardcoreDungeons.ID + ":" + name)
-    }
+    private fun tag(name: String): ITag.INamedTag<Block> =
+        BlockTags.makeWrapperTag("${HardcoreDungeons.ID}:$name")
 }

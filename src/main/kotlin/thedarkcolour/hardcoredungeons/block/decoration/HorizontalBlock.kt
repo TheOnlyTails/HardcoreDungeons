@@ -23,15 +23,12 @@ open class HorizontalBlock(properties: HProperties) : HBlock(properties) {
         builder.add(HORIZONTAL_FACING)
     }
 
-    override fun getStateForPlacement(context: BlockItemUseContext): BlockState {
-        return defaultState.with(HORIZONTAL_FACING, context.placementHorizontalFacing.opposite)
-    }
+    override fun getStateForPlacement(context: BlockItemUseContext): BlockState =
+        defaultState.with(HORIZONTAL_FACING, context.placementHorizontalFacing.opposite)
 
-    override fun rotate(state: BlockState, rot: Rotation): BlockState {
-        return state.with(HORIZONTAL_FACING, rot.rotate(state.get(HORIZONTAL_FACING)))
-    }
+    override fun rotate(state: BlockState, rot: Rotation): BlockState =
+        state.with(HORIZONTAL_FACING, rot.rotate(state.get(HORIZONTAL_FACING)))
 
-    override fun mirror(state: BlockState, mirrorIn: Mirror): BlockState {
-        return state.rotate(mirrorIn.toRotation(state.get(HORIZONTAL_FACING)))
-    }
+    override fun mirror(state: BlockState, mirrorIn: Mirror): BlockState =
+        state.rotate(mirrorIn.toRotation(state.get(HORIZONTAL_FACING)))
 }

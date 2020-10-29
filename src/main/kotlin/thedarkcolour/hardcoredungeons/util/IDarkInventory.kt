@@ -30,17 +30,11 @@ interface IDarkInventory : IItemHandlerModifiable, INBTSerializable<CompoundNBT>
 
     val size: Int
 
-    fun anyMatch(test: (ItemStack) -> Boolean): Boolean {
-        return firstOrNull(test) != null
-    }
+    fun anyMatch(test: (ItemStack) -> Boolean) = firstOrNull(test) != null
 
-    operator fun get(index: Int): ItemStack {
-        return getStackInSlot(index)
-    }
+    operator fun get(index: Int) = getStackInSlot(index)
 
-    operator fun set(index: Int, stack: ItemStack) {
-        setStackInSlot(index, stack)
-    }
+    operator fun set(index: Int, stack: ItemStack) = setStackInSlot(index, stack)
 
     fun setSize(size: Int)
 
@@ -58,41 +52,28 @@ interface IDarkInventory : IItemHandlerModifiable, INBTSerializable<CompoundNBT>
         /**
          * Use for tile entities and [canInteractWith]
          */
-        fun isTileWithinDistance(te: TileEntity, playerIn: PlayerEntity): Boolean {
-            return playerIn.position.withinDistance(te.pos, 8.0)
-        }
+        fun isTileWithinDistance(te: TileEntity, playerIn: PlayerEntity) =
+            playerIn.position.withinDistance(te.pos, 8.0)
 
-        override fun iterator(): Iterator<ItemStack> {
-            return inventory.iterator()
-        }
+        override fun iterator() = inventory.iterator()
 
-        override fun insertItem(slot: Int, stack: ItemStack, simulate: Boolean): ItemStack {
-            return inventory.insertItem(slot, stack, simulate)
-        }
+        override fun insertItem(slot: Int, stack: ItemStack, simulate: Boolean) =
+            inventory.insertItem(slot, stack, simulate)
 
-        override fun getStackInSlot(slot: Int): ItemStack {
-            return inventory[slot]
-        }
+        override fun getStackInSlot(slot: Int) = inventory[slot]
 
-        override fun getSlotLimit(slot: Int): Int {
-            return inventory.getSlotLimit(slot)
-        }
+        override fun getSlotLimit(slot: Int) = inventory.getSlotLimit(slot)
 
-        override fun isItemValid(slot: Int, stack: ItemStack): Boolean {
-            return inventory.isItemValid(slot, stack)
-        }
+        override fun isItemValid(slot: Int, stack: ItemStack) = inventory.isItemValid(slot, stack)
 
         override fun setStackInSlot(slot: Int, stack: ItemStack) {
             inventory[slot] = stack
         }
 
-        override fun getSlots(): Int {
-            return inventory.slots
-        }
+        override fun getSlots() = inventory.slots
 
-        override fun extractItem(slot: Int, amount: Int, simulate: Boolean): ItemStack {
-            return inventory.extractItem(slot, amount, simulate)
-        }
+        override fun extractItem(slot: Int, amount: Int, simulate: Boolean) =
+            inventory.extractItem(slot, amount, simulate)
 
         // override that fixes conflicts with TileEntity
         // just return the methods within TileEntity if these do not overlap with your mappings
@@ -100,32 +81,24 @@ interface IDarkInventory : IItemHandlerModifiable, INBTSerializable<CompoundNBT>
         override fun deserializeNBT(nbt: CompoundNBT)
         override fun serializeNBT(): CompoundNBT
 
-        override fun canTakeStack(slot: Int, playerIn: PlayerEntity): Boolean {
-            return inventory.canTakeStack(slot, playerIn)
-        }
+        override fun canTakeStack(slot: Int, playerIn: PlayerEntity) = inventory.canTakeStack(slot, playerIn)
 
-        override fun onTake(slot: Int, playerIn: PlayerEntity, stack: ItemStack): ItemStack {
-            return inventory.onTake(slot, playerIn, stack)
-        }
+        override fun onTake(slot: Int, playerIn: PlayerEntity, stack: ItemStack) =
+            inventory.onTake(slot, playerIn, stack)
 
-        override fun onContentsChanged(slot: Int) {
-            inventory.onContentsChanged(slot)
-        }
+        override fun onContentsChanged(slot: Int) = inventory.onContentsChanged(slot)
 
-        override fun getVanillaInventory(range: IntRange): Inventory {
-            return inventory.getVanillaInventory(range)
-        }
+        override fun getVanillaInventory(range: IntRange) = inventory.getVanillaInventory(range)
 
         override var stacks: Array<ItemStack>
             get() = inventory.stacks
             set(value) {
                 inventory.stacks = value
             }
+
         override val size: Int
             get() = inventory.size
 
-        override fun setSize(size: Int) {
-            inventory.setSize(size)
-        }
+        override fun setSize(size: Int) = inventory.setSize(size)
     }
 }

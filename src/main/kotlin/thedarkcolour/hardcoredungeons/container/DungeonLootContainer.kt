@@ -11,7 +11,6 @@ class DungeonLootContainer(
     private val worldPos: WorldPos = WorldPos.DUMMY,
 ) : HContainer(HContainers.DUNGEON_LOOT, id, playerIn.player) {
 
-    override fun canInteractWith(playerIn: PlayerEntity): Boolean {
-        return isTagInRange(worldPos, playerIn, HBlockTags.DUNGEON_LOOT_CONTAINERS)
-    }
+    override fun canInteractWith(playerIn: PlayerEntity) =
+        isTagInRange(worldPos, playerIn, HBlockTags.DUNGEON_LOOT_CONTAINERS)
 }

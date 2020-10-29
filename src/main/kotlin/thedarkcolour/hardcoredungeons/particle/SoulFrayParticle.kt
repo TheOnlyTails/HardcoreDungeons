@@ -38,13 +38,10 @@ class SoulFrayParticle(
         selectSpriteWithAge(cloudSprite)
     }
 
-    override fun getRenderType(): IParticleRenderType {
-        return PARTICLE_SHEET_TRANSLUCENT
-    }
+    override fun getRenderType(): IParticleRenderType = PARTICLE_SHEET_TRANSLUCENT
 
-    override fun getScale(partialTicks: Float): Float {
-        return particleScale * MathHelper.clamp((age + partialTicks) / maxAge * 32.0f, 0.0f, 1.0f)
-    }
+    override fun getScale(partialTicks: Float) =
+        particleScale * MathHelper.clamp((age + partialTicks) / maxAge * 32.0f, 0.0f, 1.0f)
 
     override fun tick() {
         prevPosX = posX
@@ -74,9 +71,7 @@ class SoulFrayParticle(
         }
     }
 
-    override fun getBrightnessForRender(partialTick: Float): Int {
-        return FULL_LIGHT
-    }
+    override fun getBrightnessForRender(partialTick: Float) = FULL_LIGHT
 
     class Factory(private val spriteSet: IAnimatedSprite) : IParticleFactory<BasicParticleType> {
         override fun makeParticle(

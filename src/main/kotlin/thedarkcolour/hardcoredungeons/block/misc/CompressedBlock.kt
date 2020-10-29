@@ -61,9 +61,8 @@ class CompressedBlock(private val block: () -> Block, private val properties: HP
      *
      * Only used when creating the HBlock compressed variants.
      */
-    private fun getCompressedName(compressionLevel: Int): String {
-        return compressionLevelNames[compressionLevel] + block().registryName!!.path
-    }
+    private fun getCompressedName(compressionLevel: Int) =
+        compressionLevelNames[compressionLevel] + block().registryName!!.path
 
     ///**
     // * Registers a BlockItem instance for each
@@ -78,9 +77,7 @@ class CompressedBlock(private val block: () -> Block, private val properties: HP
     /**
      * Returns the compressed [HBlock] variant for the given [compressionLevel].
      */
-    fun getBlock(compressionLevel: Int): HBlock {
-        return blockVariants[compressionLevel]
-    }
+    fun getBlock(compressionLevel: Int) = blockVariants[compressionLevel]
 
     //fun getItem(compressionLevel: Int): Item {
     //    return itemVariants[compressionLevel]

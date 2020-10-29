@@ -4,10 +4,9 @@ import net.minecraft.block.trees.Tree
 import net.minecraft.world.gen.feature.BaseTreeFeatureConfig
 import net.minecraft.world.gen.feature.ConfiguredFeature
 import thedarkcolour.hardcoredungeons.registry.HFeatures
-import java.util.*
+import java.util.Random
 
 object LumlightTree : Tree() {
-    override fun getTreeFeature(random: Random, hasBeehives: Boolean): ConfiguredFeature<BaseTreeFeatureConfig, *> {
-        return HFeatures.LUMLIGHT_TREE
-    }
+    override fun getTreeFeature(random: Random, hasBeehives: Boolean): ConfiguredFeature<BaseTreeFeatureConfig, *> =
+        HFeatures.LUMLIGHT_TREE
 }

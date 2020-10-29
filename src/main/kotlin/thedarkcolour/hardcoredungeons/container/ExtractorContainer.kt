@@ -71,7 +71,5 @@ class ExtractorContainer constructor(
         return stack
     }
 
-    override fun canInteractWith(playerIn: PlayerEntity): Boolean {
-        return inventory.canInteractWith(playerIn)
-    }
+    override fun canInteractWith(playerIn: PlayerEntity) = inventory.canInteractWith(playerIn)
 }

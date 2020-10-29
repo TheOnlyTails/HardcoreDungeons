@@ -44,24 +44,32 @@ object HDimensions {
         randomDensityOffset: Boolean,
         islandNoiseOverride: Boolean,
         amplified: Boolean,
-    ): NoiseSettings {
-        return NoiseSettings(height, sampling, topSlide, bottomSlide, horizontalSize, verticalSize, densityFactor, densityOffset, simplexSurfaceNoise, randomDensityOffset, islandNoiseOverride, amplified)
-    }
+    ) =
+        NoiseSettings(
+            height,
+            sampling,
+            topSlide,
+            bottomSlide,
+            horizontalSize,
+            verticalSize,
+            densityFactor,
+            densityOffset,
+            simplexSurfaceNoise,
+            randomDensityOffset,
+            islandNoiseOverride,
+            amplified
+        )
 
     fun samplingSettings(
         horizontalScale: Double,
         verticalScale: Double,
         horizontalFactor: Double,
         verticalFactor: Double,
-    ): ScalingSettings {
-        return ScalingSettings(horizontalScale, verticalScale, horizontalFactor, verticalFactor)
-    }
+    ) = ScalingSettings(horizontalScale, verticalScale, horizontalFactor, verticalFactor)
 
     fun slideSettings(
         target: Int,
         side: Int,
         offset: Int,
-    ): SlideSettings {
-        return SlideSettings(target, side, offset)
-    }
+    ) = SlideSettings(target, side, offset)
 }

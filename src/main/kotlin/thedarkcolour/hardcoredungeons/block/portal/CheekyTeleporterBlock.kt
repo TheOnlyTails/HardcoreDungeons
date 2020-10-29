@@ -7,10 +7,7 @@ import net.minecraft.client.gui.screen.ConfirmOpenLinkScreen
 import net.minecraft.entity.Entity
 import net.minecraft.util.Util
 import net.minecraft.util.math.BlockPos
-import net.minecraft.util.math.shapes.IBooleanFunction
-import net.minecraft.util.math.shapes.ISelectionContext
-import net.minecraft.util.math.shapes.VoxelShape
-import net.minecraft.util.math.shapes.VoxelShapes
+import net.minecraft.util.math.shapes.*
 import net.minecraft.world.IBlockReader
 import net.minecraft.world.World
 import thedarkcolour.hardcoredungeons.block.properties.HProperties
@@ -18,10 +15,11 @@ import thedarkcolour.kotlinforforge.forge.lazySidedDelegate
 import java.util.concurrent.Executors
 
 class CheekyTeleporterBlock(properties: HProperties) : Block(properties.build()) {
-    private fun canTeleport(pos: BlockPos, entityIn: Entity): Boolean {
-        return !entityIn.isPassenger && !entityIn.isBeingRidden && entityIn.isNonBoss && VoxelShapes.compare(
-            VoxelShapes.create(entityIn.boundingBox.offset(-pos.x.toDouble(), -pos.y.toDouble(), -pos.z.toDouble())), TP_CHECK, IBooleanFunction.AND)
-    }
+    private fun canTeleport(pos: BlockPos, entityIn: Entity) =
+        !entityIn.isPassenger && !entityIn.isBeingRidden && entityIn.isNonBoss && VoxelShapes.compare(
+            VoxelShapes.create(entityIn.boundingBox.offset(-pos.x.toDouble(), -pos.y.toDouble(), -pos.z.toDouble())),
+            TP_CHECK,
+            IBooleanFunction.AND)
 
     override fun onEntityCollision(state: BlockState, worldIn: World, pos: BlockPos, entityIn: Entity) {
         if (canTeleport(pos, entityIn)) {
@@ -57,10 +55,8 @@ class CheekyTeleporterBlock(properties: HProperties) : Block(properties.build())
         state: BlockState,
         worldIn: IBlockReader,
         pos: BlockPos,
-        context: ISelectionContext
-    ): VoxelShape {
-        return SHAPE
-    }
+        context: ISelectionContext,
+    ): VoxelShape = SHAPE
 
     companion object {
         // portal, side, side

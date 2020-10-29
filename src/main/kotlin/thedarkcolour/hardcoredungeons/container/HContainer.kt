@@ -49,9 +49,12 @@ abstract class HContainer(type: HContainerType<*>, id: Int, val playerIn: Player
     /**
      * Checks if the position is within the player's usable distance.
      */
-    private fun isUsableInRange(pos: BlockPos, playerIn: PlayerEntity): Boolean {
-        return playerIn.getDistanceSq(pos.x.toDouble() + 0.5, pos.y.toDouble() + 0.5, pos.z.toDouble() + 0.5) <= 64.0
-    }
+    private fun isUsableInRange(pos: BlockPos, playerIn: PlayerEntity) =
+        playerIn.getDistanceSq(
+            pos.x.toDouble() + 0.5,
+            pos.y.toDouble() + 0.5,
+            pos.z.toDouble() + 0.5
+        ) <= 64.0
 
     // this one just gets copy + pasted each time
     protected fun addPlayerSlots(playerInv: PlayerInventory) {
